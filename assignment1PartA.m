@@ -1,21 +1,20 @@
 % assignment1PartA.m
 % MTRN4230 Assignment 1 24T2
-% Name: 
-% Zid:  zXXXXXXX
+% Name: Weichen Tie
+% Zid:  z5308889
 startup_rvc
 clear; clc;
 
-host = '127.0.0.1'; % THIS IP ADDRESS MUST BE USED FOR THE VIRTUAL BOX VM
-%host = '192.168.0.100'; % THIS IP ADDRESS MUST BE USED FOR THE REAL ROBOT
+%host = '127.0.0.1'; % THIS IP ADDRESS MUST BE USED FOR THE VIRTUAL BOX VM
+host = '192.168.0.100'; % THIS IP ADDRESS MUST BE USED FOR THE REAL ROBOT
 port = 30003;
 rtde = rtde(host, port);
 
 disp("Enter the pickup position")
-pickupJointConfiguration = [0, -39.16, 63.01, -293.85, -90, -90]% readConfiguration()
-
+pickupJointConfiguration =  readConfiguration()
 clc;
 disp("Move robot to dropoff position")
-dropoffJointConfiguration = [0, -75, 90, -105, -90, 0]% readConfiguration()
+dropoffJointConfiguration= readConfiguration()
 
 clc;
 disp("Calculated pickup pose: ")
