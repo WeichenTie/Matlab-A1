@@ -47,6 +47,10 @@ INPUT C:\Users\weich\AppData\Local\Programs\MiKTeX\tex\latex\amsmath\amsgen.sty
 INPUT C:\Users\weich\AppData\Local\Programs\MiKTeX\tex\latex\amsmath\amsbsy.sty
 INPUT C:\Users\weich\AppData\Local\Programs\MiKTeX\tex\latex\amsmath\amsbsy.sty
 INPUT C:\Users\weich\AppData\Local\Programs\MiKTeX\tex\latex\amsmath\amsopn.sty
+INPUT C:\Users\weich\AppData\Local\Programs\MiKTeX\tex\latex\amsfonts\amssymb.sty
+INPUT C:\Users\weich\AppData\Local\Programs\MiKTeX\tex\latex\amsfonts\amssymb.sty
+INPUT C:\Users\weich\AppData\Local\Programs\MiKTeX\tex\latex\amsfonts\amsfonts.sty
+INPUT C:\Users\weich\AppData\Local\Programs\MiKTeX\tex\latex\amsfonts\amsfonts.sty
 INPUT C:\Users\weich\AppData\Local\Programs\MiKTeX\tex\latex\wrapfig\wrapfig.sty
 INPUT C:\Users\weich\AppData\Local\Programs\MiKTeX\tex\latex\wrapfig\wrapfig.sty
 INPUT C:\Users\weich\AppData\Local\Programs\MiKTeX\tex\latex\float\float.sty
@@ -69,6 +73,18 @@ INPUT C:\Users\weich\AppData\Local\Programs\MiKTeX\tex\latex\l3backend\l3backend
 INPUT c:\Users\weich\OneDrive\Desktop\Matlab A1\report\build\report.aux
 INPUT c:\Users\weich\OneDrive\Desktop\Matlab A1\report\build\report.aux
 INPUT c:\Users\weich\OneDrive\Desktop\Matlab A1\report\build\report.aux
+INPUT c:\Users\weich\OneDrive\Desktop\Matlab A1\report\build\partB.aux
+INPUT c:\Users\weich\OneDrive\Desktop\Matlab A1\report\build\partB.aux
+INPUT c:\Users\weich\OneDrive\Desktop\Matlab A1\report\build\partB.aux
+INPUT c:\Users\weich\OneDrive\Desktop\Matlab A1\report\build\partC.aux
+INPUT c:\Users\weich\OneDrive\Desktop\Matlab A1\report\build\partC.aux
+INPUT c:\Users\weich\OneDrive\Desktop\Matlab A1\report\build\partC.aux
+INPUT c:\Users\weich\OneDrive\Desktop\Matlab A1\report\build\partD.aux
+INPUT c:\Users\weich\OneDrive\Desktop\Matlab A1\report\build\partD.aux
+INPUT c:\Users\weich\OneDrive\Desktop\Matlab A1\report\build\partD.aux
+INPUT c:\Users\weich\OneDrive\Desktop\Matlab A1\report\build\partE.aux
+INPUT c:\Users\weich\OneDrive\Desktop\Matlab A1\report\build\partE.aux
+INPUT c:\Users\weich\OneDrive\Desktop\Matlab A1\report\build\partE.aux
 OUTPUT c:\Users\weich\OneDrive\Desktop\Matlab A1\report\build\report.aux
 INPUT C:\Users\weich\AppData\Local\Programs\MiKTeX\tex\context\base\mkii\supp-pdf.mkii
 INPUT C:\Users\weich\AppData\Local\Programs\MiKTeX\tex\context\base\mkii\supp-pdf.mkii
@@ -90,6 +106,18 @@ INPUT C:\Users\weich\AppData\Local\Programs\MiKTeX\tex\latex\jknappen\ursfs.fd
 INPUT C:\Users\weich\AppData\Local\MiKTeX\fonts\tfm\public\rsfs\rsfs10.tfm
 INPUT C:\Users\weich\AppData\Local\MiKTeX\fonts\tfm\public\rsfs\rsfs10.tfm
 INPUT C:\Users\weich\AppData\Local\MiKTeX\fonts\tfm\public\rsfs\rsfs7.tfm
+INPUT C:\Users\weich\AppData\Local\Programs\MiKTeX\tex\latex\amsfonts\umsa.fd
+INPUT C:\Users\weich\AppData\Local\Programs\MiKTeX\tex\latex\amsfonts\umsa.fd
+INPUT C:\Users\weich\AppData\Local\Programs\MiKTeX\tex\latex\amsfonts\umsa.fd
+INPUT C:\Users\weich\AppData\Local\Programs\MiKTeX\fonts\tfm\public\amsfonts\symbols\msam10.tfm
+INPUT C:\Users\weich\AppData\Local\Programs\MiKTeX\fonts\tfm\public\amsfonts\symbols\msam10.tfm
+INPUT C:\Users\weich\AppData\Local\Programs\MiKTeX\fonts\tfm\public\amsfonts\symbols\msam7.tfm
+INPUT C:\Users\weich\AppData\Local\Programs\MiKTeX\tex\latex\amsfonts\umsb.fd
+INPUT C:\Users\weich\AppData\Local\Programs\MiKTeX\tex\latex\amsfonts\umsb.fd
+INPUT C:\Users\weich\AppData\Local\Programs\MiKTeX\tex\latex\amsfonts\umsb.fd
+INPUT C:\Users\weich\AppData\Local\Programs\MiKTeX\fonts\tfm\public\amsfonts\symbols\msbm10.tfm
+INPUT C:\Users\weich\AppData\Local\Programs\MiKTeX\fonts\tfm\public\amsfonts\symbols\msbm10.tfm
+INPUT C:\Users\weich\AppData\Local\Programs\MiKTeX\fonts\tfm\public\amsfonts\symbols\msbm7.tfm
 INPUT C:\Users\weich\AppData\Local\Programs\MiKTeX\fonts\tfm\public\cm\cmr17.tfm
 INPUT C:\Users\weich\AppData\Local\Programs\MiKTeX\fonts\tfm\public\cm\cmbx12.tfm
 INPUT c:\Users\weich\OneDrive\Desktop\Matlab A1\report\build\report.toc
@@ -110,12 +138,60 @@ INPUT C:\Users\weich\AppData\Local\Programs\MiKTeX\fonts\tfm\public\amsfonts\cme
 INPUT C:\Users\weich\AppData\Local\MiKTeX\fonts\tfm\public\rsfs\rsfs10.tfm
 INPUT C:\Users\weich\AppData\Local\MiKTeX\fonts\tfm\public\rsfs\rsfs10.tfm
 INPUT C:\Users\weich\AppData\Local\MiKTeX\fonts\tfm\public\rsfs\rsfs5.tfm
+INPUT C:\Users\weich\AppData\Local\Programs\MiKTeX\fonts\tfm\public\amsfonts\symbols\msam10.tfm
+INPUT C:\Users\weich\AppData\Local\Programs\MiKTeX\fonts\tfm\public\amsfonts\symbols\msam10.tfm
+INPUT C:\Users\weich\AppData\Local\Programs\MiKTeX\fonts\tfm\public\amsfonts\symbols\msam7.tfm
+INPUT C:\Users\weich\AppData\Local\Programs\MiKTeX\fonts\tfm\public\amsfonts\symbols\msbm10.tfm
+INPUT C:\Users\weich\AppData\Local\Programs\MiKTeX\fonts\tfm\public\amsfonts\symbols\msbm10.tfm
+INPUT C:\Users\weich\AppData\Local\Programs\MiKTeX\fonts\tfm\public\amsfonts\symbols\msbm7.tfm
 OUTPUT c:\Users\weich\OneDrive\Desktop\Matlab A1\report\build\report.toc
+INPUT .\partB.tex
+INPUT .\partB.tex
 OUTPUT c:\Users\weich\OneDrive\Desktop\Matlab A1\report\build\report.pdf
 INPUT C:\Users\weich\AppData\Local\MiKTeX\fonts\map\pdftex\pdftex.map
+OUTPUT c:\Users\weich\OneDrive\Desktop\Matlab A1\report\build\partB.aux
+INPUT .\partB.tex
+INPUT .\partB.tex
+INPUT partB.tex
 INPUT C:\Users\weich\AppData\Local\Programs\MiKTeX\fonts\tfm\public\cm\cmti12.tfm
 INPUT C:\Users\weich\AppData\Local\Programs\MiKTeX\fonts\tfm\public\cm\cmbx12.tfm
+INPUT .\partC.tex
+INPUT .\partC.tex
+OUTPUT c:\Users\weich\OneDrive\Desktop\Matlab A1\report\build\partC.aux
+INPUT .\partC.tex
+INPUT .\partC.tex
+INPUT partC.tex
+INPUT .\partD.tex
+INPUT .\partD.tex
+OUTPUT c:\Users\weich\OneDrive\Desktop\Matlab A1\report\build\partD.aux
+INPUT .\partD.tex
+INPUT .\partD.tex
+INPUT partD.tex
+INPUT C:\Users\weich\AppData\Local\Programs\MiKTeX\fonts\tfm\public\cm\cmbx8.tfm
+INPUT C:\Users\weich\AppData\Local\Programs\MiKTeX\fonts\tfm\public\cm\cmbx6.tfm
+INPUT C:\Users\weich\AppData\Local\Programs\MiKTeX\fonts\tfm\public\amsfonts\cmextra\cmex7.tfm
+INPUT C:\Users\weich\AppData\Local\MiKTeX\fonts\tfm\public\rsfs\rsfs5.tfm
+INPUT C:\Users\weich\AppData\Local\Programs\MiKTeX\fonts\tfm\public\amsfonts\symbols\msam5.tfm
+INPUT C:\Users\weich\AppData\Local\Programs\MiKTeX\fonts\tfm\public\amsfonts\symbols\msbm5.tfm
+INPUT .\partE.tex
+INPUT .\partE.tex
+OUTPUT c:\Users\weich\OneDrive\Desktop\Matlab A1\report\build\partE.aux
+INPUT .\partE.tex
+INPUT .\partE.tex
+INPUT partE.tex
 INPUT c:\Users\weich\OneDrive\Desktop\Matlab A1\report\build\report.aux
+INPUT c:\Users\weich\OneDrive\Desktop\Matlab A1\report\build\partB.aux
+INPUT c:\Users\weich\OneDrive\Desktop\Matlab A1\report\build\partB.aux
+INPUT c:\Users\weich\OneDrive\Desktop\Matlab A1\report\build\partB.aux
+INPUT c:\Users\weich\OneDrive\Desktop\Matlab A1\report\build\partC.aux
+INPUT c:\Users\weich\OneDrive\Desktop\Matlab A1\report\build\partC.aux
+INPUT c:\Users\weich\OneDrive\Desktop\Matlab A1\report\build\partC.aux
+INPUT c:\Users\weich\OneDrive\Desktop\Matlab A1\report\build\partD.aux
+INPUT c:\Users\weich\OneDrive\Desktop\Matlab A1\report\build\partD.aux
+INPUT c:\Users\weich\OneDrive\Desktop\Matlab A1\report\build\partD.aux
+INPUT c:\Users\weich\OneDrive\Desktop\Matlab A1\report\build\partE.aux
+INPUT c:\Users\weich\OneDrive\Desktop\Matlab A1\report\build\partE.aux
+INPUT c:\Users\weich\OneDrive\Desktop\Matlab A1\report\build\partE.aux
 INPUT C:\Users\weich\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\cm\cmbx12.pfb
 INPUT C:\Users\weich\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\cm\cmbx12.pfb
 INPUT C:\Users\weich\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\cm\cmex10.pfb
@@ -130,6 +206,8 @@ INPUT C:\Users\weich\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\c
 INPUT C:\Users\weich\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\cm\cmr12.pfb
 INPUT C:\Users\weich\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\cm\cmr17.pfb
 INPUT C:\Users\weich\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\cm\cmr17.pfb
+INPUT C:\Users\weich\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\cm\cmr6.pfb
+INPUT C:\Users\weich\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\cm\cmr6.pfb
 INPUT C:\Users\weich\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\cm\cmr8.pfb
 INPUT C:\Users\weich\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\cm\cmr8.pfb
 INPUT C:\Users\weich\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\cm\cmsy10.pfb
@@ -138,3 +216,5 @@ INPUT C:\Users\weich\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\c
 INPUT C:\Users\weich\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\cm\cmsy8.pfb
 INPUT C:\Users\weich\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\cm\cmti12.pfb
 INPUT C:\Users\weich\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\cm\cmti12.pfb
+INPUT C:\Users\weich\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\symbols\msam10.pfb
+INPUT C:\Users\weich\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\symbols\msam10.pfb

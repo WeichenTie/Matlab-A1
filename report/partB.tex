@@ -1,0 +1,228 @@
+\section{Part B: UR5e modelling}
+
+The DH table for the UR5e robot arm is as provided:
+\begin{table}[H]
+    \centering
+    \begin{tabular}{|c|c|c|c|c|}
+        \hline
+                & \textbf{theta (rad)} & \textbf{a (m)} & \textbf{d (m)} & \textbf{alpha (rad)} \\ \hline
+        Joint 1 & 0                    & 0              & 0.1625         & $\pi$/2              \\ \hline
+        Joint 2 & 0                    & -0.425         & 0              & 0                    \\ \hline
+        Joint 3 & 0                    & -0.3922        & 0              & 0                    \\ \hline
+        Joint 4 & 0                    & 0              & 0.1333         & $\pi$/2              \\ \hline
+        Joint 5 & 0                    & 0              & 0.0997         & -$\pi$/2             \\ \hline
+        Joint 6 & 0                    & 0              & 0.0996         & 0                    \\ \hline
+    \end{tabular}
+    \caption{The DH table for the UR5e robot arm}
+    \label{table:DH-UR5e default}
+\end{table}
+
+\textit{The home joint configuration (in  millimeters and degrees)}: [0.00, 77.00, 90.00, -105.00, -90.00, 0.00]
+
+\subsection{Manual Calculation of Forward Kinematic Solutions}
+\subsubsection{Resultant Matrix and Output Pose}
+
+The resultant matrix derived for the home joint configuration is (in millimeters and radians):
+
+\begin{equation*}
+    ^{0}T_{6} = \begin{bmatrix}
+        0      & -0.8829 & 0.4695 & 421.3330  \\
+        1.0000 & 0       & 0      & -133.3000 \\
+        0      & 0.4695  & 0.8829 & -298.6978 \\
+        0      & 0       & 0      & 1.0000
+    \end{bmatrix}
+\end{equation*}
+
+The resultant posed derived for the home joint configuration is (in millimeters and radians):
+\begin{equation*}
+    \begin{bmatrix}
+        421.3330 & -133.3000 & -298.6978 & 0.4887 & 0 & 1.5708
+    \end{bmatrix}
+\end{equation*}
+\subsubsection{Full Written Working}
+
+From Table \ref{table:DH-UR5e default}, we can derive the following DH table for the home joint configuration:
+
+\begin{table}[H]
+    \centering
+    \begin{tabular}{|c|c|c|c|c|}
+        \hline
+                & \textbf{theta (rad)} & \textbf{a (m)} & \textbf{d (m)} & \textbf{alpha (rad)} \\ \hline
+        Joint 1 & 0                    & 0              & 0.1625         & 1.5708               \\ \hline
+        Joint 2 & 1.3439               & -0.425         & 0              & 0                    \\ \hline
+        Joint 3 & 1.5708               & -0.3922        & 0              & 0                    \\ \hline
+        Joint 4 & -1.8326              & 0              & 0.1333         & 1.5708               \\ \hline
+        Joint 5 & -1.5708              & 0              & 0.0997         & -1.5708              \\ \hline
+        Joint 6 & 0                    & 0              & 0.0996         & 0                    \\ \hline
+    \end{tabular}
+    \caption{The DH table for the UR5e robot arm at home joint configuration}
+    \label{table:DH-UR5e home}
+\end{table}
+
+
+From first principles, the homogenous transformation matrix ($^{n-1}T_{n}$) can be derived as follows:
+
+\begin{equation}
+    \begin{split}
+        ^{n-1}T_{n} & = Rot_{z, \theta_n} Trans_{z, d_n} Trans_{x, a_n} Rot_{x, \alpha_n}                                   \\
+                    & = \begin{bmatrix}
+                            \cos(\theta_n) & -\sin(\theta_n) & 0 & 0 \\
+                            \sin(\theta_n) & \cos(\theta_n)  & 0 & 0 \\
+                            0              & 0               & 1 & 0 \\
+                            0              & 0               & 0 & 1
+                        \end{bmatrix}
+        \begin{bmatrix}
+            1 & 0 & 0 & 0   \\
+            0 & 1 & 0 & 0   \\
+            0 & 0 & 1 & d_n \\
+            0 & 0 & 0 & 1
+        \end{bmatrix}
+        \begin{bmatrix}
+            1 & 0 & 0 & a_n \\
+            0 & 1 & 0 & 0   \\
+            0 & 0 & 1 & 0   \\
+            0 & 0 & 0 & 1
+        \end{bmatrix}
+        \begin{bmatrix}
+            0 & 0              & 0               & 0 \\
+            0 & \cos(\alpha_n) & -\sin(\alpha_n) & 0 \\
+            0 & \sin(\alpha_n) & \cos(\alpha_n)  & 0 \\
+            0 & 0              & 0               & 1
+        \end{bmatrix}                                                                            \\
+                    & = \begin{bmatrix}
+                            \cos(\theta_n) & -\sin(\theta_n)\cos(\alpha_n) & \sin(\theta_n)\sin(\alpha_n)  & a_n \cos(\theta_n) \\
+                            \sin(\theta_n) & \cos(\theta_n)\cos(\alpha_n)  & -\cos(\theta_n)\sin(\alpha_n) & a_n \sin(\theta_n) \\
+                            0              & \sin(\alpha_n)                & \cos(\alpha_n)                & d_n                \\
+                            0              & 0                             & 0                             & 1
+                        \end{bmatrix}
+    \end{split}
+    \label{equation:DH Matrix}
+\end{equation}
+
+Substituting each parameter with its corresponding joint values in the DH table in Table \ref{table:DH-UR5e home} to the transformation matrix in Equation (\ref{equation:DH Matrix}) will yield us the following matrices:
+
+\begin{equation*}
+    \begin{split}
+        ^{0}T_{1} & = \begin{bmatrix}
+                          1.0000 & 0      & 0       & 0        \\
+                          0      & 0      & -1.0000 & 0        \\
+                          0      & 1.0000 & 0       & 162.5000 \\
+                          0      & 0      & 0       & 1.0000
+                      \end{bmatrix}  \\
+        ^{1}T_{2} & = \begin{bmatrix}
+                          0.2250 & -0.9744 & 0      & -95.6042  \\
+                          0.9744 & 0.2250  & 0      & -414.1073 \\
+                          0      & 0       & 1.0000 & 0         \\
+                          0      & 0       & 0      & 1.0000
+                      \end{bmatrix} \\
+        ^{2}T_{3} & = \begin{bmatrix}
+                          0      & -1.0000 & 0      & 0         \\
+                          1.0000 & 0       & 0      & -392.2000 \\
+                          0      & 0       & 1.0000 & 0         \\
+                          0      & 0       & 0      & 1.0000
+                      \end{bmatrix} \\
+        ^{3}T_{4} & = \begin{bmatrix}
+                          -0.2588 & 0      & -0.9659 & 0        \\
+                          -0.9659 & 0      & 0.2588  & 0        \\
+                          0       & 1.0000 & 0       & 133.3000 \\
+                          0       & 0      & 0       & 1.0000
+                      \end{bmatrix} \\
+        ^{4}T_{5} & = \begin{bmatrix}
+                          0       & 0       & 1.0000 & 0       \\
+                          -1.0000 & 0       & 0      & 0       \\
+                          0       & -1.0000 & 0      & 99.7000 \\
+                          0       & 0       & 0      & 1.0000
+                      \end{bmatrix}  \\
+        ^{5}T_{6} & = \begin{bmatrix}
+                          1.0000 & 0      & 0      & 0       \\
+                          0      & 1.0000 & 0      & 0       \\
+                          0      & 0      & 1.0000 & 99.6000 \\
+                          0      & 0      & 0      & 1.0000
+                      \end{bmatrix}
+    \end{split}
+\end{equation*}
+
+And since coordinate frames can be compounded through the relationship $^{A}T_{C} =\hspace{1pt} ^{A}T_{B} \hspace{1pt} ^{B}T_{C}$, we can derive the resultant homogenous matrix $^{0}T_{6}$,
+\begin{equation*}
+    \begin{split}
+        ^{0}T_{6} & = \hspace{1pt} ^{0}T_{1} \hspace{1pt} ^{1}T_{2}\hspace{1pt} ^{2}T_{3}\hspace{1pt} ^{3}T_{4}\hspace{1pt} ^{4}T_{5}\hspace{1pt} ^{5}T_{6} \\
+        ^{0}T_{6} & = \begin{bmatrix}
+                          0      & -0.8829 & 0.4695 & 421.3330  \\
+                          1.0000 & 0       & 0      & -133.3000 \\
+                          0      & 0.4695  & 0.8829 & -298.6978 \\
+                          0      & 0       & 0      & 1.0000
+                      \end{bmatrix}
+    \end{split}
+\end{equation*}
+
+To get the pose, we realise that the resultant homogenous matrix takes the form of:
+\begin{equation*}
+    \begin{bmatrix}
+        {\begin{array}{ccc|c}&&&\\&R&&T\\&&&\\\hline 0&0&0&1\end{array}}
+    \end{bmatrix}
+\end{equation*}
+So our final joint positions in millimeters are,
+\begin{equation*}
+    [421.3330, -133.3000, -298.6978]
+\end{equation*}
+And our roll, pitch and yaw values in radians respectively are can be calulated using Matlab's tr2rpy function,
+\begin{center}
+    \begin{lstlisting}
+    rpy = tr2rpy(R);
+    % rpy = [0.4887, 0, 1.5708]
+    \end{lstlisting}
+\end{center}
+And thus, our final pose will be,
+\begin{equation*}
+    [421.3330, -133.3000, -298.6978, 0.4887, 0, 1.5708]
+\end{equation*}
+\subsubsection{Intermediate Matrices}
+\begin{equation*}
+    \begin{split}
+        ^{0}T_{1} & = \begin{bmatrix}
+                          1.0000 & 0      & 0       & 0        \\
+                          0      & 0      & -1.0000 & 0        \\
+                          0      & 1.0000 & 0       & 162.5000 \\
+                          0      & 0      & 0       & 1.0000
+                      \end{bmatrix}    \\
+        ^{0}T_{2} & = \begin{bmatrix}
+                          0.2250 & -0.9744 & 0       & -95.6042  \\
+                          0      & 0       & -1.0000 & 0         \\
+                          0.9744 & 0.2250  & 0       & -251.6073 \\
+                          0      & 0       & 0       & 1.0000
+                      \end{bmatrix}  \\
+        ^{0}T_{3} & = \begin{bmatrix}
+                          -0.9744 & -0.2250 & 0       & 286.5437  \\
+                          0       & 0       & -1.0000 & 0         \\
+                          0.2250  & -0.9744 & 0       & -339.8331 \\
+                          0       & 0       & 0       & 1.0000
+                      \end{bmatrix} \\
+        ^{0}T_{4} & = \begin{bmatrix}
+                          0.4695 & 0       & 0.8829  & 286.5437  \\
+                          0      & -1.0000 & 0       & -133.3000 \\
+                          0.8829 & 0       & -0.4695 & -339.8331 \\
+                          0      & 0       & 0       & 1.0000
+                      \end{bmatrix}  \\
+        ^{0}T_{5} & = \begin{bmatrix}
+                          0      & -0.8829 & 0.4695 & 374.5736  \\
+                          1.0000 & 0       & 0      & -133.3000 \\
+                          0      & 0.4695  & 0.8829 & -386.6394 \\
+                          0      & 0       & 0      & 1.0000
+                      \end{bmatrix}   \\
+        ^{0}T_{6} & = \begin{bmatrix}
+                          0      & -0.8829 & 0.4695 & 421.3330  \\
+                          1.0000 & 0       & 0      & -133.3000 \\
+                          0      & 0.4695  & 0.8829 & -298.6978 \\
+                          0      & 0       & 0      & 1.0000
+                      \end{bmatrix}
+    \end{split}
+\end{equation*}
+\subsubsection{Explanation of the Meaning of Calculated Matrices}
+
+
+
+\subsection{Model of UR5e Robotic Arm using RVC Toolbox}
+\subsubsection{Forward Kinematic Conversion to Attain Pose with Angles in RPY}
+\subsubsection{Matrix Results and Converted Results}
+\subsection{Validation of Calculations}
+\subsubsection{Screenshot Showing Pose Including the Rotation in RPY Representation}

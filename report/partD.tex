@@ -1,0 +1,115 @@
+\section{Part D: Robot Singularities}
+\subsection{Determine the DH matrix}
+\begin{table}[H]
+    \centering
+    \begin{tabular}{|c|c|c|c|c|}
+        \hline
+                & \textbf{theta (rad)} & \textbf{a (m)} & \textbf{d (m)} & \textbf{alpha (rad)} \\ \hline
+        Joint 1 & $q_{1}$              & 1              & 0              & 0                    \\ \hline
+        Joint 2 & $q_{2}$              & 1              & 0              & 0                    \\ \hline
+        Joint 3 & $q_{3}$              & 1              & 0              & 0                    \\ \hline
+    \end{tabular}
+    \caption{The DH table for the 3-Link Robot}
+    \label{table:3-Link Robot}
+\end{table}
+\subsection{Calculate the Jacobian}
+
+To calculate the Jacobian that relates the joint velocities to linear velocities of the manipulator,
+
+\begin{equation*}
+    \det(J) = 0
+\end{equation*}
+\\
+The forward kinematics solution is as follows,
+
+\begin{equation*}
+    T_E = \begin{pmatrix}
+        \cos(q_1 + q_2 + q_3) & -\sin(q_1 + q_2 + q_3) & \cos(q_1 + q_2 + q_3) + \cos(q_1 + q_2) + \cos(q_1) \\
+        \sin(q_1 + q_2 + q_3) & \cos(q_1 + q_2 + q_3)  & \sin(q_1 + q_2 + q_3) + \sin(q_1 + q_2) + \sin(q_1) \\
+        0                     & 0                      & 1                                                   \\
+    \end{pmatrix}
+\end{equation*}
+\\
+And since the forward kinematics solution for a 2D transformation matrix takes the form of,
+\begin{equation*}
+    \begin{bmatrix}
+        {\begin{array}{cc|c}R&&T\\&&\\\hline 0&0&1\end{array}}
+    \end{bmatrix}
+\end{equation*}
+We can derive that,
+\begin{equation*}
+    \textbf{T} = \begin{pmatrix}
+        x \\ y
+    \end{pmatrix} = \begin{pmatrix}
+        \cos(q_1 + q_2 + q_3) + \cos(q_1 + q_2) + \cos(q_1) \\
+        \sin(q_1 + q_2 + q_3) + \sin(q_1 + q_2) + \sin(q_1)
+    \end{pmatrix} \\
+\end{equation*}
+then,
+\begin{equation*}
+    \begin{split}
+        \frac{\delta x}{\delta q_1} & = -\sin(q_1 + q_2 + q_3) - \sin(q_1 + q_2) - \sin(q_1) \\
+        \frac{\delta x}{\delta q_2} & = -\sin(q_1 + q_2 + q_3) - \sin(q_1 + q_2)             \\
+        \frac{\delta x}{\delta q_3} & = -\sin(q_1 + q_2 + q_3)                               \\
+        \frac{\delta y}{\delta q_1} & =  \cos(q_1 + q_2 + q_3) + \cos(q_1 + q_2) + \cos(q_1) \\
+        \frac{\delta y}{\delta q_2} & =  \cos(q_1 + q_2 + q_3) + \cos(q_1 + q_2)             \\
+        \frac{\delta y}{\delta q_3} & = \cos(q_1 + q_2 + q_3)
+    \end{split}
+\end{equation*}
+So the Jacobian matrix (\textbf{J$_v$}) that relates joint velocity $ \begin{pmatrix}
+        \dot{q_1} \\ \dot{q_2} \\ \dot{q_3}
+    \end{pmatrix} $ to spacial velocities $ \begin{pmatrix}
+        \dot{x} \\ \dot{y}
+    \end{pmatrix} $ takes the form of,
+\begin{equation*}
+    \begin{pmatrix}
+        \dot{x} \\ \dot{y}
+    \end{pmatrix} = \textbf{J$_v$} \begin{pmatrix}
+        \dot{q_1} \\ \dot{q_2} \\ \dot{q_3}
+    \end{pmatrix}
+\end{equation*}
+where,
+\begin{equation*}
+    \begin{split}
+         & \textbf{J$_v$}  = \begin{pmatrix}
+                                 \frac{\delta x}{\delta q_1} & \frac{\delta x}{\delta q_2} & \frac{\delta x}{\delta q_3} \\
+                                 \frac{\delta y}{\delta q_1} & \frac{\delta y}{\delta q_2} & \frac{\delta y}{\delta q_3}
+                             \end{pmatrix}                  \\
+         & = \begin{pmatrix}
+                 -\sin(q_1 + q_2 + q_3) - \sin(q_1 + q_2) - \sin(q_1) & -\sin(q_1 + q_2 + q_3) - \sin(q_1 + q_2) & -\sin(q_1 + q_2 + q_3) \\
+                 \cos(q_1 + q_2 + q_3) + \cos(q_1 + q_2) + \cos(q_1)  & \cos(q_1 + q_2 + q_3) + \cos(q_1 + q_2)  & \cos(q_1 + q_2 + q_3)
+             \end{pmatrix}
+    \end{split}
+\end{equation*}
+\\
+The Jacobian that relates the joint velocities with angular velocities can be derived as follows,
+\begin{equation*}
+    \begin{split}
+        \textbf{R} & = \begin{pmatrix}
+                           \cos(q_1 + q_2 + q_3) & -\sin(q_1 + q_2 + q_3) \\
+                           \sin(q_1 + q_2 + q_3) & \cos(q_1 + q_2 + q_3)
+                       \end{pmatrix} \\
+                   & = \begin{pmatrix}
+                           \cos(\theta) & -\sin(\theta) \\
+                           \sin(\theta) & \cos(\theta)
+                       \end{pmatrix}
+    \end{split}
+\end{equation*}
+\\ where, by inspection,
+\begin{equation*}
+    \begin{split}
+        \theta                         & = q_1 + q_2 + q_3                                                                                           \\
+        \therefore \hspace{14pt}\omega & = \dot{\theta} = \dot{q_1} + \dot{q_2} + \dot{q_3}                                                          \\
+        \therefore \hspace{14pt}\omega & = \begin{pmatrix} 1 & 1 & 1 \end{pmatrix} \begin{pmatrix} \dot{q_1} \\ \dot{q_2} \\ \dot{q_3} \end{pmatrix}
+    \end{split}
+\end{equation*}
+\\ so that,
+\begin{equation*}
+    \textbf{J$_\omega$} = \begin{pmatrix} 1 & 1 & 1 \end{pmatrix}
+\end{equation*}
+\subsection{For what value(s) is the manipulator at a singularity?}
+To calculate the values of the manipulator at a singularity, we can use the following property.
+
+\subsection{What motion is restricted at this singularity?}
+
+\subsection{What type of singularity is experienced?}
