@@ -5,13 +5,13 @@
 startup_rvc
 clear; clc;
 
-%host = '127.0.0.1'; % THIS IP ADDRESS MUST BE USED FOR THE VIRTUAL BOX VM
-host = '192.168.0.100'; % THIS IP ADDRESS MUST BE USED FOR THE REAL ROBOT
-port = 30003;
-rtde = rtde(host, port);
+host = '127.0.0.1'; % THIS IP ADDRESS MUST BE USED FOR THE VIRTUAL BOX VM
+%host = '192.168.0.100'; % THIS IP ADDRESS MUST BE USED FOR THE REAL ROBOT
+% port = 30003;
+% rtde = rtde(host, port);
 
 disp("Enter the pickup position")
-pickupJointConfiguration =  readConfiguration()
+pickupJointConfiguration =  [0.00, 77.00, 90.00, -105.00, -90.00, 0.00]
 clc;
 disp("Move robot to dropoff position")
 dropoffJointConfiguration= readConfiguration()
@@ -66,10 +66,10 @@ function outputPose = convertJointToPose(jointConfiguration)
     ure5_a = [0, -0.425, -0.3922, 0, 0, 0] * 1000;
     ure5_d = [0.1625, 0, 0, 0.1333, 0.0997, 0.0996] * 1000;
     ure5_alpha = rad2deg([pi / 2, 0 , 0, pi/2, -pi/2, 0]);
-    
+    foor = deg2rad(jointConfiguration)
     mat = eye(4);
     for index = 1:length(jointConfiguration)
-        i = index;
+        i = index
         trans_z_n_prev = [[1, 0, 0, 0        ];
                           [0, 1, 0, 0        ];
                           [0, 0, 1, ure5_d(i)];
@@ -90,11 +90,10 @@ function outputPose = convertJointToPose(jointConfiguration)
                  [0, sind(ure5_alpha(i)),  cosd(ure5_alpha(i)), 0];
                  [0, 0                  ,  0                  , 1]];
         
-        T_n = trans_z_n_prev * rot_z_n_prev * trans_z * rot_z;
-        mat = mat * T_n;
+        T_n = trans_z_n_prev * rot_z_n_prev * trans_z * rot_z
+        mat = mat * T_n
     end
-
-    outputPose = [mat(1:3,4)', tr2rpy(mat)];
+    outputPose = [mat(1:3,4)', tr2rpy(mat)]
     % You must not use RTDE at all in this implementation (it
     % must be done from first principles)
 end
