@@ -16,10 +16,7 @@
 
 To calculate the Jacobian that relates the joint velocities to linear velocities of the manipulator,
 
-\begin{equation*}
-    \det(J) = 0
-\end{equation*}
-\\
+
 The forward kinematics solution is as follows,
 
 \begin{equation*}
@@ -103,12 +100,25 @@ The Jacobian that relates the joint velocities with angular velocities can be de
         \therefore \hspace{14pt}\omega & = \begin{pmatrix} 1 & 1 & 1 \end{pmatrix} \begin{pmatrix} \dot{q_1} \\ \dot{q_2} \\ \dot{q_3} \end{pmatrix}
     \end{split}
 \end{equation*}
-\\ so that,
+\\ and hence,
 \begin{equation*}
     \textbf{J$_\omega$} = \begin{pmatrix} 1 & 1 & 1 \end{pmatrix}
 \end{equation*}
+Therefore the full Jacobian matrix is as follows,
+\begin{equation*}
+    \textbf{J} = \begin{pmatrix}
+        -\sin(q_1 + q_2 + q_3) - \sin(q_1 + q_2) - \sin(q_1) & -\sin(q_1 + q_2 + q_3) - \sin(q_1 + q_2) & -\sin(q_1 + q_2 + q_3) \\
+        \cos(q_1 + q_2 + q_3) + \cos(q_1 + q_2) + \cos(q_1)  & \cos(q_1 + q_2 + q_3) + \cos(q_1 + q_2)  & \cos(q_1 + q_2 + q_3) \\
+        1&1&1
+    \end{pmatrix}
+\end{equation*}
 \subsection{For what value(s) is the manipulator at a singularity?}
-To calculate the values of the manipulator at a singularity, we can use the following property.
+To calculate the values of the manipulator at a singularity, we check the values for which the Jacobian determinant equals 0.
+
+\begin{equation*}
+    \det(J) = 0
+\end{equation*}
+\\
 
 \subsection{What motion is restricted at this singularity?}
 

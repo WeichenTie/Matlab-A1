@@ -11,7 +11,7 @@ host = '127.0.0.1'; % THIS IP ADDRESS MUST BE USED FOR THE VIRTUAL BOX VM
 % rtde = rtde(host, port);
 
 disp("Enter the pickup position")
-pickupJointConfiguration =  [0.00, 77.00, 90.00, -105.00, -90.00, 0.00]
+pickupJointConfiguration =  [0.00, 75.00, 90.00, -105.00, -90.00, 0.00]
 clc;
 disp("Move robot to dropoff position")
 dropoffJointConfiguration= readConfiguration()
