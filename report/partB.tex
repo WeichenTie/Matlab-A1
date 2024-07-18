@@ -17,28 +17,27 @@ The DH table for the UR5e robot arm is as provided:
     \label{table:DH-UR5e default}
 \end{table}
 
-\textit{The home joint configuration (in  millimeters and radians)}: [-588.5342, -133.3000, 371.9096, 3.1416, 0, 1.5708]
-However upon cross inspection with the simulation, the 5th joint had an angle of -3.1416 but this is equivalent as it is a phase difference of 2 $\pi$
+\textit{The home joint configuration (in degrees)}: [0.00, -75.00, 90.00, -105.00, -90.00, 0]
+
 \subsection{Manual Calculation of Forward Kinematic Solutions}
 \subsubsection{Resultant Matrix and Output Pose}
-
 The resultant matrix derived for the home joint configuration is (in millimeters and radians):
 
 \begin{equation*}
     ^{0}T_{6} = \begin{bmatrix}
-        0      & 1.0000 & 0       & -588.5342 \\
-        1.0000 & 0      & 0       & -133.3000 \\
-        0      & 0      & -1.0000 & 371.9096  \\
-        0      & 0      & 0       & 1.0000
+        0    & 1.00 & 0     & -588.53 \\
+        1.00 & 0    & 0     & -133.30 \\
+        0    & 0    & -1.00 & 371.91  \\
+        0    & 0    & 0     & 1.00
     \end{bmatrix}
 \end{equation*}
-
-The resultant posed derived for the home joint configuration is (in millimeters and radians):
+\\The resultant posed derived for the home joint configuration is (in millimeters and radians):
 \begin{equation*}
     \begin{bmatrix}
         -588.5342 & -133.3000 & 371.9096 & 3.1416 & 0 & 1.5708
     \end{bmatrix}
 \end{equation*}
+\\ However upon cross inspection with the simulation, the 5th joint had an angle of -3.1416, but this is equivalent as it is a phase difference of 2 $\pi$
 \subsubsection{Full Written Working}
 
 From Table \ref{table:DH-UR5e default}, we can derive the following DH table for the home joint configuration:
@@ -104,40 +103,40 @@ Substituting each parameter with its corresponding joint values in the DH table 
 \begin{equation*}
     \begin{split}
         ^{0}T_{1} & = \begin{bmatrix}
-                          1.0000 & 0      & 0       & 0        \\
-                          0      & 0      & -1.0000 & 0        \\
-                          0      & 1.0000 & 0       & 162.5000 \\
-                          0      & 0      & 0       & 1.0000
-                      \end{bmatrix}  \\
+                          1.00 & 0    & 0     & 0      \\
+                          0    & 0    & -1.00 & 0      \\
+                          0    & 1.00 & 0     & 162.50 \\
+                          0    & 0    & 0     & 1.0000
+                      \end{bmatrix}    \\
         ^{1}T_{2} & = \begin{bmatrix}
-                          0.2588 & -0.9659 & 0      & -109.9981 \\
-                          0.9659 & 0.2588  & 0      & -410.5185 \\
-                          0      & 0       & 1.0000 & 0         \\
-                          0      & 0       & 0      & 1.0000
-                      \end{bmatrix} \\
+                          0.26 & -0.97 & 0    & -110.00 \\
+                          0.97 & 0.26  & 0    & -410.52 \\
+                          0    & 0     & 1.00 & 0       \\
+                          0    & 0     & 0    & 1.00
+                      \end{bmatrix}   \\
         ^{2}T_{3} & = \begin{bmatrix}
-                          0      & -1.0000 & 0      & 0         \\
-                          1.0000 & 0       & 0      & -392.2000 \\
-                          0      & 0       & 1.0000 & 0         \\
-                          0      & 0       & 0      & 1.0000
-                      \end{bmatrix} \\
+                          0    & -1.00 & 0    & 0       \\
+                          1.00 & 0     & 0    & -392.20 \\
+                          0    & 0     & 1.00 & 0       \\
+                          0    & 0     & 0    & 1.00
+                      \end{bmatrix}   \\
         ^{3}T_{4} & = \begin{bmatrix}
-                          -0.2588 & 0      & -0.9659 & 0        \\
-                          -0.9659 & 0      & 0.2588  & 0        \\
-                          0       & 1.0000 & 0       & 133.3000 \\
-                          0       & 0      & 0       & 1.0000
+                          -0.26 & 0      & -0.97 & 0      \\
+                          -0.97 & 0      & 0.26  & 0      \\
+                          0     & 1.0000 & 0     & 133.30 \\
+                          0     & 0      & 0     & 1.00
                       \end{bmatrix} \\
         ^{4}T_{5} & = \begin{bmatrix}
-                          0       & 0       & 1.0000 & 0       \\
-                          -1.0000 & 0       & 0      & 0       \\
-                          0       & -1.0000 & 0      & 99.7000 \\
-                          0       & 0       & 0      & 1.0000
-                      \end{bmatrix}  \\
+                          0     & 0     & 1.00 & 0     \\
+                          -1.00 & 0     & 0    & 0     \\
+                          0     & -1.00 & 0    & 99.70 \\
+                          0     & 0     & 0    & 1.00
+                      \end{bmatrix}    \\
         ^{5}T_{6} & = \begin{bmatrix}
-                          1.0000 & 0      & 0      & 0       \\
-                          0      & 1.0000 & 0      & 0       \\
-                          0      & 0      & 1.0000 & 99.6000 \\
-                          0      & 0      & 0      & 1.0000
+                          1.00 & 0    & 0    & 0     \\
+                          0    & 1.00 & 0    & 0     \\
+                          0    & 0    & 1.00 & 99.60 \\
+                          0    & 0    & 0    & 1.00
                       \end{bmatrix}
     \end{split}
 \end{equation*}
@@ -147,10 +146,10 @@ And since coordinate frames can be compounded through the relationship $^{A}T_{C
     \begin{split}
         ^{0}T_{6} & = \hspace{1pt} ^{0}T_{1} \hspace{1pt} ^{1}T_{2}\hspace{1pt} ^{2}T_{3}\hspace{1pt} ^{3}T_{4}\hspace{1pt} ^{4}T_{5}\hspace{1pt} ^{5}T_{6} \\
         ^{0}T_{6} & = \begin{bmatrix}
-                          0      & -0.8829 & 0.4695 & 421.3330  \\
-                          1.0000 & 0       & 0      & -133.3000 \\
-                          0      & 0.4695  & 0.8829 & -298.6978 \\
-                          0      & 0       & 0      & 1.0000
+                          0    & 1.00 & 0     & -588.53 \\
+                          1.00 & 0    & 0     & -133.30 \\
+                          0    & 0    & -1.00 & 371.91  \\
+                          0    & 0    & 0     & 1.00
                       \end{bmatrix}
     \end{split}
 \end{equation*}
@@ -163,57 +162,57 @@ To get the pose, we realise that the resultant homogenous matrix takes the form 
 \end{equation*}
 So our final joint positions in millimeters are,
 \begin{equation*}
-    [421.3330, -133.3000, -298.6978]
+    [-588.5342, -133.3000, 371.9096]
 \end{equation*}
-And our roll, pitch and yaw values in radians respectively are can be calulated using Matlab's tr2rpy function,
+And our roll, pitch and yaw values in radians respectively are can be calculated using Matlab's tr2rpy function,
 \begin{center}
     \begin{lstlisting}
     rpy = tr2rpy(R);
-    % rpy = [0.4887, 0, 1.5708]
+    % rpy = [3.1416, 0, 1.5708]
     \end{lstlisting}
 \end{center}
 And thus, our final pose will be,
 \begin{equation*}
-    [421.3330, -133.3000, -298.6978, 0.4887, 0, 1.5708]
+    [-588.5342, -133.3000, 371.9096, 3.1416, 0, 1.5708]
 \end{equation*}
 \subsubsection{Intermediate Matrices}
 \begin{equation*}
     \begin{split}
         ^{0}T_{1} & = \begin{bmatrix}
-                          1.0000 & 0      & 0       & 0        \\
-                          0      & 0      & -1.0000 & 0        \\
-                          0      & 1.0000 & 0       & 162.5000 \\
-                          0      & 0      & 0       & 1.0000
-                      \end{bmatrix}     \\
-        ^{0}T_{2} & = \begin{bmatrix}
-                          0.2588  & 0.9659 &         & 0 -109.9981 \\
-                          0       & 0      & -1.0000 & 0           \\
-                          -0.9659 & 0.2588 & 0       & 573.0185    \\
-                          0       & 0      & 0       & 1.0000
-                      \end{bmatrix} \\
-        ^{0}T_{3} & = \begin{bmatrix}
-                          0.9659 & -0.2588 & 0       & -488.8342 \\
-                          0      & 0       & -1.0000 & 0         \\
-                          0.2588 & 0.9659  & 0       & 471.5096  \\
-                          0      & 0       & 0       & 1.0000
-                      \end{bmatrix}   \\
-        ^{0}T_{4} & = \begin{bmatrix}
-                          0       & 0       & -1.0000 & -488.8342 \\
-                          0       & -1.0000 & 0       & -133.3000 \\
-                          -1.0000 & 0       & 0       & 471.5096  \\
-                          0       & 0       & 0       & 1.0000
-                      \end{bmatrix}  \\
-        ^{0}T_{5} & = \begin{bmatrix}
-                          0      & 1.0000 & 0       & -588.5342 \\
-                          1.0000 & 0      & 0       & -133.3000 \\
-                          0      & 0      & -1.0000 & 471.5096  \\
-                          0      & 0      & 0       & 1.0000
+                          1.00 & 0    & 0     & 0      \\
+                          0    & 0    & -1.00 & 0      \\
+                          0    & 1.00 & 0     & 162.50 \\
+                          0    & 0    & 0     & 1.00
                       \end{bmatrix}    \\
+        ^{0}T_{2} & = \begin{bmatrix}
+                          0.26  & 0.97 & 0     & -110.00 \\
+                          0     & 0    & -1.00 & 0       \\
+                          -0.97 & 0.26 & 0     & 573.02  \\
+                          0     & 0    & 0     & 1.00
+                      \end{bmatrix}  \\
+        ^{0}T_{3} & = \begin{bmatrix}
+                          0.97 & -0.26 & 0     & -488.83 \\
+                          0    & 0     & -1.00 & 0       \\
+                          0.26 & 0.97  & 0     & 471.51  \\
+                          0    & 0     & 0     & 1.00
+                      \end{bmatrix}  \\
+        ^{0}T_{4} & = \begin{bmatrix}
+                          0     & 0     & -1.00 & -488.83 \\
+                          0     & -1.00 & 0     & -133.30 \\
+                          -1.00 & 0     & 0     & 471.51  \\
+                          0     & 0     & 0     & 1.00
+                      \end{bmatrix} \\
+        ^{0}T_{5} & = \begin{bmatrix}
+                          0    & 1.00 & 0     & -588.53 \\
+                          1.00 & 0    & 0     & -133.30 \\
+                          0    & 0    & -1.00 & 471.51  \\
+                          0    & 0    & 0     & 1.00
+                      \end{bmatrix}   \\
         ^{0}T_{6} & = \begin{bmatrix}
-                          0      & 1.0000 & 0       & -588.5342 \\
-                          1.0000 & 0      & 0       & -133.3000 \\
-                          0      & 0      & -1.0000 & 371.9096  \\
-                          0      & 0      & 0       & 1.0000
+                          0    & 1.00 & 0     & -588.53 \\
+                          1.00 & 0    & 0     & -133.30 \\
+                          0    & 0    & -1.00 & 371.91  \\
+                          0    & 0    & 0     & 1.00
                       \end{bmatrix}
     \end{split}
 \end{equation*}

@@ -1,0 +1,32 @@
+% calculateMaxLinearVelocity.m
+% MTRN4230 Assignment 1 24T2
+% Name: 
+% Zid:  zXXXXXXX
+
+%% Function you must complete
+% You must implement the following function
+
+function maxLinearVelocity = calculateMaxLinearVelocity(jointPositions,jointVelocities)
+    
+    L(1) = Link([0, 0.1625 * 1000, 0,  pi/2]); % Link 1. Offset of theta1
+    L(2) = Link([0, 0, -0.425 * 1000,  0]); % Link 2. Offset of theta2
+    L(3) = Link([0,  0, -0.3922 * 1000, 0]); % Link 3. Offset of theta3
+    L(4) = Link([0, 0.1333 * 1000, 0,  pi/2]); % Link 4. Offset of theta1
+    L(5) = Link([0, 0.0997 * 1000, 0,  -pi/2]); % Link 5. Offset of theta2
+    L(6) = Link([0, 0.0996 * 1000, 0,  0]); % Link 6. Offset of theta3
+
+    robot = SerialLink(L, 'name', 'Articulated');
+    
+    disp(jointVelocities)
+
+    for i = 1:length(jointPositions)
+        jacobian = jacob0(robot, jointPositions(i));
+        
+    end
+    
+
+    % Write your implementation here
+    maxLinearVelocity = 0;
+end
+
+% calculateMaxLinearVelocity1(jointPositions, jointVelocities)

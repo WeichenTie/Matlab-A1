@@ -1,29 +1,30 @@
 % calculateMaxLinearVelocity.m
 % MTRN4230 Assignment 1 24T2
-% Name: 
-% Zid:  zXXXXXXX
+% Name: Weichen Tie
+% Zid:  z5308889
 
 %% Function you must complete
 % You must implement the following function
+
 function maxLinearVelocity = calculateMaxLinearVelocity(jointPositions,jointVelocities)
-
-    d = []
-
-
     
-    L(1) = Link('revolute', 'd', d(1), 'a', a(1), 'alpha', alpha(1), 'offset', 0); % Link 1. Offset of theta1
-    L(2) = Link('revolute', 'd', d(2), 'a', a(2), 'alpha', alpha(2), 'offset', 0); % Link 2. Offset of theta2
-    L(3) = Link('revolute', 'd', d(3), 'a', a(3), 'alpha', alpha(3), 'offset', 0); % Link 3. Offset of theta3
-    L(4) = Link('revolute', 'd', d(4), 'a', a(3), 'alpha', alpha(4), 'offset', 0); % Link 4. Offset of theta1
-    L(5) = Link('revolute', 'd', d(5), 'a', a(4), 'alpha', alpha(5), 'offset', 0); % Link 5. Offset of theta2
-    L(6) = Link('revolute', 'd', d(6), 'a', a(5), 'alpha', alpha(6), 'offset', 0); % Link 6. Offset of theta3
+    L(1) = Link([0, 0.1625, 0,  pi/2]); % Link 1
+    L(2) = Link([0, 0, -0.425,  0]); % Link 2
+    L(3) = Link([0,  0, -0.3922, 0]); % Link 3
+    L(4) = Link([0, 0.1333, 0,  pi/2]); % Link 4
+    L(5) = Link([0, 0.0997, 0,  -pi/2]); % Link 5
+    L(6) = Link([0, 0.0996, 0,  0]); % Link 6
 
-
-
-    % Write your implementation here
+    robot = SerialLink(L, 'name', 'Articulated');
     maxLinearVelocity = 0;
-    
-
-    disp(jointPositions)
-    disp(jointVelocities)
+    for i = 1:length(jointPositions)
+        jacobian = jacob0(robot, jointPositions(i,:));
+        toolVelocity = jacobian * jointVelocities(i,:)';
+        linearVelocities = toolVelocity(1:3);
+        dotProduct = sum(linearVelocities .* linearVelocities);
+        magnitude =sqrt(dotProduct);
+        maxLinearVelocity = max(maxLinearVelocity, magnitude);
+    end
 end
+
+% calculateMaxLinearVelocity1(jointPositions, jointVelocities)

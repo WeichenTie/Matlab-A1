@@ -1,4 +1,21 @@
 \section{Part C: Robot Speed Limits}
 \subsection{Approach to Calculation}
-\subsection{Jacobian Calculation}
+Foo
+\\
+\\
+\begin{algorithm}[H]
+    Links $\gets$ DH Table; \\
+    Robot $\gets$ Links; \\
+    maxSpeed $\gets$ 0; \\
+    \For{$i=1$ \KwTo $n$ \tcc*{Where n = number of joint positions/velocities.}}
+    {
+        jacobianMatrix $\gets$ jacobian(robot, jointPosition(i));\\
+        toolVelocity $\gets$ jacobianMatrix * jointVelocities(i);\\
+        linearVelocity $\gets$ First 3 rows of toolVelocity; \\
+        speed $\gets$ Magnitude of linearVelocity; \\
+        maxSpeed $\gets \max$(maxSpeed, speed);
+    }
+    \Return{maxSpeed};
+\end{algorithm}
+\subsection{Jacobian Calculation for the First Location}
 
