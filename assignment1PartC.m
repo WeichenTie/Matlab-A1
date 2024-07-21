@@ -33,7 +33,9 @@ pause(1); % Small pause to stop rtde/Matlab skipping recording values
 
 % Function call for implementation
 v_max = calculateMaxLinearVelocity(joints, jointVelocities);
-
+poses(end,:)
+vpa(joints(end,:))
+jointVelocities(end, :)
 disp("Max linear velocity achieved: ");
 disp(v_max);
 

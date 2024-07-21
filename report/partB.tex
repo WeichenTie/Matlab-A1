@@ -98,7 +98,7 @@ From first principles, the homogenous transformation matrix ($^{n-1}T_{n}$) can 
     \label{equation:DH Matrix}
 \end{equation}
 
-Substituting each parameter with its corresponding joint values in the DH table in Table \ref{table:DH-UR5e home} to the transformation matrix in Equation (\ref{equation:DH Matrix}) will yield us the following matrices:
+Substituting each parameter with its corresponding joint values in the DH table in Table \ref{table:DH-UR5e home} to the joint-to-joint transformation matrix in Equation (\ref{equation:DH Matrix}) will yield us the following matrices:
 
 \begin{equation*}
     \begin{split}
@@ -176,6 +176,7 @@ And thus, our final pose will be,
     [-588.5342, -133.3000, 371.9096, 3.1416, 0, 1.5708]
 \end{equation*}
 \subsubsection{Intermediate Matrices}
+The intermediate matrices that transforms between coordinate frames from the base frame can be calculated with the help of joint-to-joint matrices from 2.1.2.
 \begin{equation*}
     \begin{split}
         ^{0}T_{1}                                                 & = \begin{bmatrix}
@@ -221,7 +222,80 @@ And thus, our final pose will be,
 
 
 \subsection{Model of UR5e Robotic Arm using RVC Toolbox}
+Using the Matlab and RVC toolbox, we can use the following code to model the UR5e robot in the home position,
+
+\begin{algorithm}[H]
+    jointConfiguration = deg2rad([0.00, -75.00, 90.00, -105.00, -90.00, 0.00]);\\
+    L(1) = Link([0, 0.1625, 0,  pi/2]); \% Link 1\\
+    L(2) = Link([0, 0, -0.425,  0]); \% Link 2\\
+    L(3) = Link([0,  0, -0.3922, 0]); \% Link 3\\
+    L(4) = Link([0, 0.1333, 0,  pi/2]); \% Link 4\\
+    L(5) = Link([0, 0.0997, 0,  -pi/2]); \% Link 5\\
+    L(6) = Link([0, 0.0996, 0,  0]); \% Link 6\\
+    \% Creating the robot\\
+    robot = SerialLink(L, 'name', 'UR5e');\\
+    robot.teach(jointConfiguration)
+\end{algorithm}
+\begin{figure}[H]
+    \centering
+    \includegraphics[totalheight=8cm]{Part B Matlab tool result.png}
+    \caption{UR5e robot modelled in Matlab at the home position}
+    \label{fig:UR5e robot modelled in Matlab}
+\end{figure}
 \subsubsection{Forward Kinematic Conversion to Attain Pose with Angles in RPY}
-\subsubsection{Matrix Results and Converted Results}
+By replacing the last code line with fkine(robot, jointConfiguration), we obtain the following matrix result,
+\begin{equation*}
+    \begin{bmatrix}
+        0 & 1 & 0  & -0.5885 \\
+        1 & 0 & 0  & -0.1333 \\
+        0 & 0 & -1 & 0.3719  \\
+        0 & 0 & 0  & 1
+    \end{bmatrix}
+\end{equation*}
+\begin{figure}[H]
+    \centering
+    \includegraphics[totalheight=4cm]{Part B Fkine result.png}
+    \caption{Matlab fkine result}
+    \label{fig:fkine result}
+\end{figure}
+The only difference between the Matlab result with the manually calculated result in section 2.1 is the final column's values being 1000 times smaller due to using meters instead of millimeters.
+\\ \\Once again, to get the pose, we realise that the matrix takes the form of:
+\begin{equation*}
+    \begin{bmatrix}
+        {\begin{array}{ccc|c}&&&\\&R&&T\\&&&\\\hline 0&0&0&1\end{array}}
+    \end{bmatrix}
+\end{equation*}
+So our final joint positions in meters are,
+\begin{equation*}
+    [-0.5885, -0.1333, 0.3719]
+\end{equation*}
+And our roll, pitch and yaw values in radians respectively are can be calculated using Matlab's tr2rpy function,
+\begin{center}
+    \begin{lstlisting}
+    rpy = tr2rpy(R);
+    % rpy = [3.1416, 0, 1.5708]
+    \end{lstlisting}
+\end{center}
+And thus, our final pose will be,
+\begin{equation*}
+    [-0.5885, -0.1333, 0.3719, 3.1416, 0, 1.5708]
+\end{equation*}
+\\ Which matches our manually calculated results when converted to millimeters.
 \subsection{Validation of Calculations}
 \subsubsection{Screenshot Showing Pose Including the Rotation in RPY Representation}
+The following screenshot shows the pose of the UR5e robot in the virtual simulation with a rotation vector.
+\begin{figure}[H]
+    \centering
+    \includegraphics[totalheight=8cm]{Part B Simulation tool result.png}
+    \caption{UR5e robot in the home position}
+    \label{fig:UR5e robot in the home position}
+\end{figure}
+
+When this rotation vector is then converted into RPY, we will get the following angles,
+\begin{equation*}
+    \begin{bmatrix}
+        3.1416 & 0 & 1.5708
+    \end{bmatrix}
+\end{equation*}
+Which validates the calculations performed in previous sections.
+

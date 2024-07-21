@@ -7,15 +7,15 @@ clear; clc;
 
 host = '127.0.0.1'; % THIS IP ADDRESS MUST BE USED FOR THE VIRTUAL BOX VM
 %host = '192.168.0.100'; % THIS IP ADDRESS MUST BE USED FOR THE REAL ROBOT
-% port = 30003;
-% rtde = rtde(host, port);
+port = 30003;
+rtde = rtde(host, port);
 
 disp("Enter the pickup position")
 pickupJointConfiguration =  [0.00, -75.00, 90.00, -105.00, -90.00, 0.00]
 clc;
 disp("Move robot to dropoff position")
-dropoffJointConfiguration= readConfiguration()
-
+dropoffJointConfiguration=  [0.00, -75.00, 90.00, -105.00, -90.00, 0.00]
+% readConfiguration();
 clc;
 disp("Calculated pickup pose: ")
 pickupPose = convertJointToPose(pickupJointConfiguration)
@@ -42,7 +42,7 @@ rtde.movel(pickupPose'+[0 0 20 0 0 0], 'pose')
 
 rtde.movel(dropoffPose'+[0 0 20 0 0 0], 'pose')
 rtde.movel(dropoffPose', 'pose')
-rtde.movel(dropoffPose'+[0 0 20 0 0 0], 'pose')
+% rtde.movel(dropoffPose'+[0 0 20 0 0 0], 'pose')
 
 % Function to convert user input to array
 

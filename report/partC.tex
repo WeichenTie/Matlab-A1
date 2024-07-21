@@ -64,7 +64,7 @@ The velocity of the end effector at the first position can also be manually calc
 \begin{equation*}
     \begin{bmatrix} q_1&q_2&q_3&q_4&q_5&q_6 \end{bmatrix} = \begin{bmatrix}0 & -1.124& 1.803 & -2.250 & -1.571 & 0 \end{bmatrix}
 \end{equation*}
-\\We first derive the transformation matrices for each joint position ($\hspace{1pt} ^{0}T_{1} ,\hspace{1pt} ^{0}T_{2},\hspace{1pt} ^{0}T_{3},\hspace{1pt} ^{0}T_{4},\hspace{1pt} ^{0}T_{5},\hspace{1pt} ^{0}T_{6}$) using the following property,
+\\We first derive the transformation matrices for each joint position ($\hspace{1pt} ^{0}T_{1} ,\hspace{1pt} ^{0}T_{2},\hspace{1pt} ^{0}T_{3},\hspace{1pt} ^{0}T_{4},\hspace{1pt} ^{0}T_{5},\hspace{1pt} ^{0}T_{6}$) using the joint-to-joint transformation matrix,
 \begin{equation*}
     ^{n-1}T_{n}  = \begin{bmatrix}
         \cos(q_n) & -\sin(q_n)\cos(\alpha_n) & \sin(q_n)\sin(\alpha_n)  & a_n \cos(q_n) \\
@@ -77,40 +77,125 @@ Therefore we get the following intermediate matrices,
 \begin{equation*}
     \begin{split}
         ^{0}T_{1}                                                 & = \begin{bmatrix}
-                                                                          1.00 & 0    & 0     & 0      \\
-                                                                          0    & 0    & -1.00 & 0      \\
-                                                                          0    & 1.00 & 0     & 162.50 \\
-                                                                          0    & 0    & 0     & 1.00
-                                                                      \end{bmatrix}   \\
-        ^{0}T_{2} = \hspace{1pt} ^{0}T_{1} \hspace{1pt} ^{1}T_{2} & = \begin{bmatrix}
-                                                                          0.4321	0.9018	0	-183.6334
-                                                                          0	0	-1.0000	0
-                                                                          -0.9018	0.4321	0	545.7803
-                                                                          0	0	0	1.0000
-                                                                      \end{bmatrix}       \\
+                                                                          1 & 0 & 0  & 0      \\
+                                                                          0 & 0 & -1 & 0      \\
+                                                                          0 & 1 & 0  & 0.1625 \\
+                                                                          0 & 0 & 0  & 1
+                                                                      \end{bmatrix}                                             \\
+        ^{0}T_{2} = \hspace{1pt} ^{0}T_{1} \hspace{1pt} ^{1}T_{2} & =                     \begin{bmatrix}
+                                                                                              1 & 0 & 0  & 0      \\
+                                                                                              0 & 0 & -1 & 0      \\
+                                                                                              0 & 1 & 0  & 0.1625 \\
+                                                                                              0 & 0 & 0  & 1
+                                                                                          \end{bmatrix}\begin{bmatrix}
+                                                                                                           0.4319  & 0.9019 & 0 & -0.1835 \\
+                                                                                                           -0.9019 & 0.4319 & 0 & 0.3833  \\
+                                                                                                           0       & 0      & 1 & 0       \\
+                                                                                                           0       & 0      & 0 & 1
+                                                                                                       \end{bmatrix} \\
+                                                                  & =\begin{bmatrix}
+                                                                         0.4319  & 0.9019 & 0  & -0.1835 \\
+                                                                         0       & 0      & -1 & 0       \\
+                                                                         -0.9019 & 0.4319 & 0  & 0.5458  \\
+                                                                         0       & 0      & 0  & 1
+                                                                     \end{bmatrix}                                  \\
         ^{0}T_{3} = \hspace{1pt} ^{0}T_{2} \hspace{1pt} ^{2}T_{3} & = \begin{bmatrix}
-                                                                          0.7782	-0.6280	0	-488.8439
-                                                                          0	0	-1.0000	0
-                                                                          0.6280	0.7782	0	299.4727
-                                                                          0	0	0	1.0000
-                                                                      \end{bmatrix}      \\
-        ^{0}T_{4} = \hspace{1pt} ^{0}T_{3} \hspace{1pt} ^{3}T_{4} & = \begin{bmatrix}
-                                                                          -0.0002	0	-1.0000	-488.8439
-                                                                          0	-1.0000	0	-133.3000
-                                                                          -1.0000	0	0.0002	299.4727
-                                                                          0	0	0	1.0000
-                                                                      \end{bmatrix}     \\
-        ^{0}T_{5} = \hspace{1pt} ^{0}T_{4} \hspace{1pt} ^{4}T_{5} & = \begin{bmatrix}
-                                                                          0.0000	1.0000	-0.0002	-588.5439
-                                                                          1.0000	0	0.0002	-133.3000
-                                                                          0.0002	-0.0002	-1.0000	299.4931
-                                                                          0	0	0	1.0000
-                                                                      \end{bmatrix} \\
-        ^{0}T_{6} = \hspace{1pt} ^{0}T_{5} \hspace{1pt} ^{5}T_{6} & = \begin{bmatrix}
-                                                                          0.0000	1.0000	-0.0002	-588.5642
-                                                                          1.0000	0	0.0002	-133.2797
-                                                                          0.0002	-0.0002	-1.0000	199.8931
-                                                                          0	0	0	1.0000
-                                                                      \end{bmatrix}
+                                                                          0.4319  & 0.9019 & 0  & -0.1835 \\
+                                                                          0       & 0      & -1 & 0       \\
+                                                                          -0.9019 & 0.4319 & 0  & 0.5458  \\
+                                                                          0       & 0      & 0  & 1
+                                                                      \end{bmatrix}\begin{bmatrix}
+                                                                                       -0.2301 & -0.9732 & 0 & 0.0902  \\
+                                                                                       0.9732  & -0.2301 & 0 & -0.3817 \\
+                                                                                       0       & 0       & 1 & 0       \\
+                                                                                       0       & 0       & 0 & 1
+                                                                                   \end{bmatrix}                    \\
+                                                                  & =\begin{bmatrix}
+                                                                         0.7784 & -0.6278 & 0  & -0.4888 \\
+                                                                         0      & 0       & -1 & 0       \\
+                                                                         0.6278 & 0.7784  & 0  & 0.2996  \\
+                                                                         0      & 0       & 0  & 1
+                                                                     \end{bmatrix}                                  \\                                      \\
+        ^{0}T_{4} = \hspace{1pt} ^{0}T_{3} \hspace{1pt} ^{3}T_{4} & =\begin{bmatrix}
+                                                                         0.7784 & -0.6278 & 0  & -0.4888 \\
+                                                                         0      & 0       & -1 & 0       \\
+                                                                         0.6278 & 0.7784  & 0  & 0.2996  \\
+                                                                         0      & 0       & 0  & 1
+                                                                     \end{bmatrix}\begin{bmatrix}
+                                                                                      -0.6278 & 0 & -0.7783 & 0      \\
+                                                                                      -0.7783 & 0 & 0.6278  & 0      \\
+                                                                                      0       & 1 & 0       & 0.1333 \\
+                                                                                      0       & 0 & 0       & 1
+                                                                                  \end{bmatrix}                      \\
+                                                                  & =\begin{bmatrix}
+                                                                         0  & 0  & -1 & -0.4888 \\
+                                                                         0  & -1 & 0  & -0.1333 \\
+                                                                         -1 & 0  & 0  & 0.2996  \\
+                                                                         0  & 0  & 0  & 1
+                                                                     \end{bmatrix}                                           \\
+        ^{0}T_{5} = \hspace{1pt} ^{0}T_{4} \hspace{1pt} ^{4}T_{5} & =\begin{bmatrix}
+                                                                         0  & 0  & -1 & -0.4888 \\
+                                                                         0  & -1 & 0  & -0.1333 \\
+                                                                         -1 & 0  & 0  & 0.2996  \\
+                                                                         0  & 0  & 0  & 1
+                                                                     \end{bmatrix}  \begin{bmatrix}
+                                                                                        0  & 0  & 1 & 0      \\
+                                                                                        -1 & 0  & 0 & 0      \\
+                                                                                        0  & -1 & 0 & 0.0997 \\
+                                                                                        0  & 0  & 0 & 1
+                                                                                    \end{bmatrix}                              \\
+                                                                  & =\begin{bmatrix}
+                                                                         0 & 1 & 0  & -0.5885 \\
+                                                                         1 & 0 & 0  & -0.1333 \\
+                                                                         0 & 0 & -1 & 0.2996  \\
+                                                                         0 & 0 & 0  & 1
+                                                                     \end{bmatrix}                                             \\
+        ^{0}T_{6} = \hspace{1pt} ^{0}T_{5} \hspace{1pt} ^{5}T_{6} & =\begin{bmatrix}
+                                                                         0 & 1 & 0  & -0.5885 \\
+                                                                         1 & 0 & 0  & -0.1333 \\
+                                                                         0 & 0 & -1 & 0.2996  \\
+                                                                         0 & 0 & 0  & 1
+                                                                     \end{bmatrix}  \begin{bmatrix}
+                                                                                        -1 & 0  & 0 & 0      \\
+                                                                                        0  & -1 & 0 & 0      \\
+                                                                                        0  & 0  & 1 & 0.0996 \\
+                                                                                        0  & 0  & 0 & 1
+                                                                                    \end{bmatrix}                              \\
+                                                                  & =\begin{bmatrix}
+                                                                         0  & -1 & 0  & -0.5885 \\
+                                                                         -1 & 0  & 0  & -0.1333 \\
+                                                                         0  & 0  & -1 & 0.2000  \\
+                                                                         0  & 0  & 0  & 1
+                                                                     \end{bmatrix}
     \end{split}
+\end{equation*}
+
+Since these matrices takes the form of,
+
+\begin{equation*}
+    ^0T_n(q_1, q_2, ..., q_n) = ^0T_n(\textbf{q}) = \begin{bmatrix}
+        ^0R_n(\textbf{q}) & \hspace{1pt}^0o_n(\textbf{q}) \\
+        0                 & 1
+    \end{bmatrix}
+\end{equation*}
+\\ And the $i^{th}$ column of the Jacobian matrix for an articulated robot takes the form of,
+
+\begin{equation*}
+    J_i = \begin{bmatrix}
+        ^0\textbf{z}_{i-1} \times (^0\textbf{o}_{n} - ^0\textbf{o}_{i-1}) \\
+        ^0\textbf{z}_{i-1}
+    \end{bmatrix}
+\end{equation*}
+
+The resulting Jacobian matrix will be:
+
+\begin{equation*}
+    \begin{bmatrix}
+        0.1333  & -0.0375 & 0.3458  & 0.0996  & 0       & 0  \\
+        -0.5885 & 0       & 0       & 0       & -0.0996 & 0  \\
+        0       & -0.5885 & -0.4050 & -0.0997 & 0       & 0  \\
+        0       & 0       & 0       & 0       & -1      & 0  \\
+        0       & -1      & -1      & -1      & 0       & 0  \\
+        1       & 0       & 0       & 0       & 0       & -1
+    \end{bmatrix}
 \end{equation*}
