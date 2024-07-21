@@ -14,19 +14,63 @@
 \end{table}
 \subsection{Calculate the Jacobian}
 
-To calculate the Jacobian that relates the joint velocities to linear velocities of the manipulator,
-\\
-The forward kinematics solution is as follows,
-
+To calculate the Jacobian that relates the joint velocities to linear velocities of the manipulator, we need to first derive the homogenous transfromation matrix $^{0}T_{3}$ where,
 \begin{equation*}
-    T_E = \begin{pmatrix}
-        \cos(q_1 + q_2 + q_3) & -\sin(q_1 + q_2 + q_3) & \cos(q_1 + q_2 + q_3) + \cos(q_1 + q_2) + \cos(q_1) \\
-        \sin(q_1 + q_2 + q_3) & \cos(q_1 + q_2 + q_3)  & \sin(q_1 + q_2 + q_3) + \sin(q_1 + q_2) + \sin(q_1) \\
-        0                     & 0                      & 1                                                   \\
-    \end{pmatrix}
+    ^{0}T_{3}    = \hspace{1pt} ^{0}T_{1} \hspace{1pt} ^{1}T_{2}\hspace{1pt} ^{2}T_{3}\hspace{1pt}\\
 \end{equation*}
-\\
-And since the forward kinematics solution for a 2D transformation matrix takes the form of,
+\\and,
+\begin{equation*}
+    ^{n-1}T_{n}  = \begin{bmatrix}
+        \cos(q_n) & -\sin(q_n)\cos(\alpha_n) & \sin(q_n)\sin(\alpha_n)  & a_n \cos(q_n) \\
+        \sin(q_n) & \cos(q_n)\cos(\alpha_n)  & -\cos(q_n)\sin(\alpha_n) & a_n \sin(q_n) \\
+        0         & \sin(\alpha_n)           & \cos(\alpha_n)           & d_n           \\
+        0         & 0                        & 0                        & 1
+    \end{bmatrix}
+\end{equation*}
+\\By substituting the DH parameters in table \ref{table:3-Link Robot} into $^{n-1}T_{n}$ we get,
+\begin{equation*}
+    ^{n-1}T_{n}  = \begin{bmatrix}
+        \cos(q_n) & -\sin(q_n) & 0 & \cos(q_n) \\
+        \sin(q_n) & \cos(q_n)  & 0 & \sin(q_n) \\
+        0         & 0          & 1 & 0         \\
+        0         & 0          & 0 & 1
+    \end{bmatrix}
+\end{equation*}
+\\which can be simplified to a 2D transformation matrix by removing the third row and column,
+\begin{equation*}
+    ^{n-1}T_{n}  = \begin{bmatrix}
+        \cos(q_n) & -\sin(q_n) & \cos(q_n) \\
+        \sin(q_n) & \cos(q_n)  & \sin(q_n) \\
+        0         & 0          & 1
+    \end{bmatrix}
+\end{equation*}
+\\ We can now derive the full 2D homogenous transformation matrix $^0T_3$ by chaining transformation matrices.
+\begin{equation*}
+    \begin{split}
+        ^{0}T_{3} & = \hspace{1pt} ^{0}T_{1} \hspace{1pt} ^{1}T_{2}\hspace{1pt} ^{2}T_{3}                                  \\
+                  & = \begin{bmatrix}
+                          \cos(q_1) & -\sin(q_1) & \cos(q_1) \\
+                          \sin(q_1) & \cos(q_1)  & \sin(q_1) \\
+                          0         & 0          & 1
+                      \end{bmatrix}
+        \begin{bmatrix}
+            \cos(q_2) & -\sin(q_2) & \cos(q_2) \\
+            \sin(q_2) & \cos(q_2)  & \sin(q_2) \\
+            0         & 0          & 1
+        \end{bmatrix}
+        \begin{bmatrix}
+            \cos(q_3) & -\sin(q_3) & \cos(q_3) \\
+            \sin(q_3) & \cos(q_3)  & \sin(q_3) \\
+            0         & 0          & 1
+        \end{bmatrix}                                                                                 \\
+                  & = \begin{bmatrix}
+                          \cos(q_1 + q_2 + q_3) & -\sin(q_1 + q_2 + q_3) & \cos(q_1 + q_2 + q_3) + \cos(q_1 + q_2) + \cos(q_1) \\
+                          \sin(q_1 + q_2 + q_3) & \cos(q_1 + q_2 + q_3)  & \sin(q_1 + q_2 + q_3) + \sin(q_1 + q_2) + \sin(q_1) \\
+                          0                     & 0                      & 1                                                   \\
+                      \end{bmatrix}
+    \end{split}
+\end{equation*}
+\\ And since the forward kinematics solution for a 2D transformation matrix takes the form of,
 \begin{equation*}
     \begin{bmatrix}
         {\begin{array}{cc|c}R&&T\\&&\\\hline 0&0&1\end{array}}
@@ -34,12 +78,12 @@ And since the forward kinematics solution for a 2D transformation matrix takes t
 \end{equation*}
 We can derive that,
 \begin{equation*}
-    \textbf{T} = \begin{pmatrix}
+    \textbf{T} = \begin{bmatrix}
         x \\ y
-    \end{pmatrix} = \begin{pmatrix}
+    \end{bmatrix} = \begin{bmatrix}
         \cos(q_1 + q_2 + q_3) + \cos(q_1 + q_2) + \cos(q_1) \\
         \sin(q_1 + q_2 + q_3) + \sin(q_1 + q_2) + \sin(q_1)
-    \end{pmatrix} \\
+    \end{bmatrix} \\
 \end{equation*}
 then,
 \begin{equation*}
@@ -52,64 +96,61 @@ then,
         \frac{\delta y}{\delta q_3} & = \cos(q_1 + q_2 + q_3)
     \end{split}
 \end{equation*}
-So the Jacobian matrix (\textbf{J$_v$}) that relates joint velocity $ \begin{pmatrix}
+So the Jacobian matrix (\textbf{J$_v$}) that relates joint velocity $ \begin{bmatrix}
         \dot{q_1} \\ \dot{q_2} \\ \dot{q_3}
-    \end{pmatrix} $ to spacial velocities $ \begin{pmatrix}
+    \end{bmatrix} $ to spacial velocities $ \begin{bmatrix}
         \dot{x} \\ \dot{y}
-    \end{pmatrix} $ takes the form of,
+    \end{bmatrix} $ takes the form of,
 \begin{equation*}
-    \begin{pmatrix}
+    \begin{bmatrix}
         \dot{x} \\ \dot{y}
-    \end{pmatrix} = \textbf{J$_v$} \begin{pmatrix}
+    \end{bmatrix} = \textbf{J$_v$} \begin{bmatrix}
         \dot{q_1} \\ \dot{q_2} \\ \dot{q_3}
-    \end{pmatrix}
+    \end{bmatrix}
 \end{equation*}
 where,
 \begin{equation*}
     \begin{split}
-         & \textbf{J$_v$}  = \begin{pmatrix}
+         & \textbf{J$_v$}  = \begin{bmatrix}
                                  \frac{\delta x}{\delta q_1} & \frac{\delta x}{\delta q_2} & \frac{\delta x}{\delta q_3} \\
                                  \frac{\delta y}{\delta q_1} & \frac{\delta y}{\delta q_2} & \frac{\delta y}{\delta q_3}
-                             \end{pmatrix}                  \\
-         & = \begin{pmatrix}
+                             \end{bmatrix}                  \\
+         & = \begin{bmatrix}
                  -\sin(q_1 + q_2 + q_3) - \sin(q_1 + q_2) - \sin(q_1) & -\sin(q_1 + q_2 + q_3) - \sin(q_1 + q_2) & -\sin(q_1 + q_2 + q_3) \\
                  \cos(q_1 + q_2 + q_3) + \cos(q_1 + q_2) + \cos(q_1)  & \cos(q_1 + q_2 + q_3) + \cos(q_1 + q_2)  & \cos(q_1 + q_2 + q_3)
-             \end{pmatrix}
+             \end{bmatrix}
     \end{split}
 \end{equation*}
 \\
 The Jacobian that relates the joint velocities with angular velocities can be derived as follows,
 \begin{equation*}
-    \begin{split}
-        \textbf{R} & = \begin{pmatrix}
-                           \cos(q_1 + q_2 + q_3) & -\sin(q_1 + q_2 + q_3) \\
-                           \sin(q_1 + q_2 + q_3) & \cos(q_1 + q_2 + q_3)
-                       \end{pmatrix} \\
-                   & = \begin{pmatrix}
-                           \cos(\theta) & -\sin(\theta) \\
-                           \sin(\theta) & \cos(\theta)
-                       \end{pmatrix}
-    \end{split}
+    \textbf{R} = \begin{bmatrix}
+        \cos(\theta) & -\sin(\theta) \\
+        \sin(\theta) & \cos(\theta)
+    \end{bmatrix} = \begin{bmatrix}
+        \cos(q_1 + q_2 + q_3) & -\sin(q_1 + q_2 + q_3) \\
+        \sin(q_1 + q_2 + q_3) & \cos(q_1 + q_2 + q_3)
+    \end{bmatrix}
 \end{equation*}
 \\ where, by inspection,
 \begin{equation*}
     \begin{split}
         \theta                         & = q_1 + q_2 + q_3                                                                                           \\
         \therefore \hspace{14pt}\omega & = \dot{\theta} = \dot{q_1} + \dot{q_2} + \dot{q_3}                                                          \\
-        \therefore \hspace{14pt}\omega & = \begin{pmatrix} 1 & 1 & 1 \end{pmatrix} \begin{pmatrix} \dot{q_1} \\ \dot{q_2} \\ \dot{q_3} \end{pmatrix}
+        \therefore \hspace{14pt}\omega & = \begin{bmatrix} 1 & 1 & 1 \end{bmatrix} \begin{bmatrix} \dot{q_1} \\ \dot{q_2} \\ \dot{q_3} \end{bmatrix}
     \end{split}
 \end{equation*}
 \\ and hence,
 \begin{equation*}
-    \textbf{J$_\omega$} = \begin{pmatrix} 1 & 1 & 1 \end{pmatrix}
+    \textbf{J$_\omega$} = \begin{bmatrix} 1 & 1 & 1 \end{bmatrix}
 \end{equation*}
 Therefore the full Jacobian matrix is as follows,
 \begin{equation*}
-    \textbf{J} = \begin{pmatrix}
+    \textbf{J} = \begin{bmatrix}
         -\sin(q_1 + q_2 + q_3) - \sin(q_1 + q_2) - \sin(q_1) & -\sin(q_1 + q_2 + q_3) - \sin(q_1 + q_2) & -\sin(q_1 + q_2 + q_3) \\
         \cos(q_1 + q_2 + q_3) + \cos(q_1 + q_2) + \cos(q_1)  & \cos(q_1 + q_2 + q_3) + \cos(q_1 + q_2)  & \cos(q_1 + q_2 + q_3)  \\
         1                                                    & 1                                        & 1
-    \end{pmatrix}
+    \end{bmatrix}
 \end{equation*}
 \subsection{For what value(s) is the manipulator at a singularity?}
 To calculate the values of the manipulator at a singularity, we check the values for which the Jacobian determinant equals 0.
@@ -117,8 +158,41 @@ To calculate the values of the manipulator at a singularity, we check the values
 \begin{equation*}
     \det(J) = 0
 \end{equation*}
-\\
-
+\\ To simplify the calculation process, let,
+\begin{equation*}
+    \begin{split}
+        a & = \sin(q_1 + q_2 + q_3) \\
+        b & = \sin(q_1 + q_2)       \\
+        c & = \sin(q_1)             \\
+        d & = \cos(q_1 + q_2 + q_3) \\
+        e & = \cos(q_1 + q_2)       \\
+        f & = \cos(q_1)             \\
+    \end{split}
+\end{equation*}
+\\ So that our Jacobian matrix is,
+\begin{equation*}
+    \textbf{J} = \begin{bmatrix}
+        -a - b - c & -a - b & -a \\
+        d + e + f  & d + e  & d  \\
+        1          & 1      & 1
+    \end{bmatrix}
+\end{equation*}
+And as such, solving for singularity positions through the Jacobian determinant $\det(\textbf{J}) = 0$ equates to,
+\begin{equation*}
+    \begin{split}
+        \det(\textbf{J}) = 0 & = (-a - b - c)[(d + e) - (d)] - (-a - b)[(d + e + f) - (d)] + (-a)[(d+e+f)-(d+e)]                            \\
+                             & = -e(a + b + c) + (a+b)(e + f) - af                                                                          \\
+                             & = -ae -be - ce + ae + af + be + bf -af                                                                       \\
+                             & = bf - ce                                                                                                    \\
+                             & = \sin(q_1 + q_2)\cos(q_1)  - \sin(q_1)\cos(q_1 + q_2)                                                       \\
+                             & = \sin(q_2) \hspace{170pt}\because \sin(\alpha - \beta) = \sin(\alpha)\cos(\beta)  - \sin(\beta)\cos(\alpha)
+    \end{split}
+\end{equation*}
+Therefore the singularities exist whenever $\sin(q_2) = 0$ or in other words,
+\begin{equation*}
+    q_2 = n\pi, \hspace{12pt}n\in\mathbb{Z}
+\end{equation*}
+This occurs whenever link 2 is colinear with link 1.
 \subsection{What motion is restricted at this singularity?}
 
 \subsection{What type of singularity is experienced?}

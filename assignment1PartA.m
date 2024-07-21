@@ -66,7 +66,6 @@ function outputPose = convertJointToPose(jointConfiguration)
     ure5_a = [0, -0.425, -0.3922, 0, 0, 0] * 1000;
     ure5_d = [0.1625, 0, 0, 0.1333, 0.0997, 0.0996] * 1000;
     ure5_alpha = rad2deg([pi / 2, 0 , 0, pi/2, -pi/2, 0]);
-    foor = deg2rad(jointConfiguration)
     mat = eye(4);
     for index = 1:length(jointConfiguration)
         i = index
